@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Contact</title>
+	<style type="text/css">
+
+		body {
+			background: url(bg.png);
+			overflow: hidden;
+		}
+		#container {
+			display: grid;
+			grid-template-columns: 0px 1fr;
+			grid-template-rows: 15vh 75vh 10vh;
+			grid-template-areas: 
+			"header header"
+			"main main"
+			"footer footer";
+		}
+		header {
+			grid-area: header;
+			width: 100%;
+			display: grid;
+			grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+			grid-gap: 20px;
+			position: relative;
+			background-color: lightblue;
+		    
+		}
+
+		ul li {
+
+		float: left;
+		
+		list-style: none;
+
+		}
+
+		
+
+		 ul li a 
+		  {
+		    display: block;
+		    margin: 1px;
+		    padding: 6px 20px;
+		    text-decoration: none;
+		    color: #262626;
+		    border: 1px solid black;
+		  }
+
+		  ul li a.None,
+		   ul li a:hover 
+		  {
+		    background: navy;
+		    color: #fff;
+		    transition: 0.5s;
+		  }
+
+		main {
+			grid-column: main;
+			width: 100%;
+			display: grid;
+			grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+			grid-gap: 10px;
+			text-align: center;
+			padding-top: 1%;
+		}
+
+		.box {
+			border: 1px solid black;
+			align-items: center;
+    		justify-content: center;
+    		border-radius: 25px;
+    		/*box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);*/
+		}
+
+		p {
+			font-size: 20px;
+		}
+		h2 {
+			font-style: italic;
+		}
+
+		.logo {
+			width: 5%;
+			height: 5%;
+		}
+
+		#wa {
+			width: 6.5%;
+			height: 6.5%;
+		}
+	</style>
+</head>
+<body id="container">
+	<header>
+		<ul>
+			<li><a href="index.html" class="None"> Home</a></li>
+			<li><a href="About.html"> About</a></li>
+			<li><a href="Contact.html"> Contact</a></li>
+		</ul>
+	</header>
+
+	<main>
+		<div class="box">
+			<div>
+				<h1> CONTACT US </h1>
+			</div>
+			<div>
+				<h2> "24 hours available to help you"</h2>
+
+				<p>
+					<img src="call.png" class="logo"> +673 87654321 
+				</p>
+
+				<p>
+					<img src="wa.png" id="wa"> E-InvitationdCard.byLS
+					<img src="ig.png" class="logo"> E-InvitationdCard.byLS
+				</p>
+
+				<p>
+					<img src="fb.png" class="logo"> E-InvitationdCard.byLS
+					<img src="twitter.png" class="logo"> E-InvitationdCard.byLS
+				</p> <br>
+
+				<p>
+					Don't hestitate to call or text us for any help regarding our E-Invitation Card and your feedback will be highly appreciated!
+				</p>
+
+			</div>
+		</div>
+	</main>
+	
+</html>

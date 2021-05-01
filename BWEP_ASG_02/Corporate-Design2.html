@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Corporate Design 2</title>
+
+	<meta charset="utf-8">
+	<meta name="viewport "content="width=device-width, initial-scale=1.0">
+
+	<style type="text/css">
+		#container {
+			display: grid;
+			grid-template-columns: 170px 1fr;
+			grid-template-rows: 10vh 87vh;
+			grid-template-areas: 
+			"header header"
+			"aside main"
+		}
+
+		header {
+			grid-area: header;
+			width: 100%;
+			display: grid;
+			grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+			grid-gap: 20px;
+			position: relative;
+		    background-color: lightblue;
+		}
+
+		ul li {
+
+		float: left;
+		
+		list-style: none;
+
+		}
+
+		
+
+		 ul li a 
+		  {
+		    display: block;
+		    margin: 1px;
+		    padding: 6px 20px;
+		    text-decoration: none;
+		    color: #262626;
+		    border: 1px solid black;
+		  }
+
+		  ul li a.None,
+		   ul li a:hover 
+		  {
+		    background: navy;
+		    color: #fff;
+		    transition: 0.5s;
+		  }
+
+		main {
+			grid-column: main;
+			/*background-color: pink;*/
+			background: url(bg-corporate.jpg);
+		}
+		aside {
+			grid-row: aside;
+			background-color: green;
+		}
+		#cardbox {
+			/*background-color: green;*/
+			text-align: center;
+			/*width: 430px;
+			height: 300px;*/
+			margin-left: 1%;
+			font-size: 20px;
+		}
+		#fav {
+			margin-left: 1%;
+		}
+		#changeColor {
+			margin-top: 3%;
+			margin-left: 5%;
+		}
+
+		.drop-zone, #drop-zone {
+			position: relative;
+			width: 430px;
+			height: 400px;
+			overflow: hidden;
+			background: orange;
+			color: white;
+			box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+		}
+
+		#line1 {
+		height: 20%;
+		width: 30%;
+	}
+
+	button {
+			margin-left: 1%;
+		}
+
+	@media screen and (max-width: 768px) {
+			.drop-zone, .container {
+				width: 100%;
+			}
+		}
+
+	</style>
+
+
+	<script type="text/javascript">
+		function add(){
+			var recipent = document.getElementById("recipent");
+			var invitation = document.getElementById("invitation");
+			var date = document.getElementById("date");
+			var time = document.getElementById("time");
+			var place = document.getElementById("place");
+
+			localStorage.setItem("recipent",recipent.value);
+			localStorage.setItem("invitation",invitation.value);
+			localStorage.setItem("date",date.value);
+			localStorage.setItem("time",time.value);
+			localStorage.setItem("place",place.value);
+
+		}
+		
+		function preview(){
+
+			var recipent = document.getElementById("recipent");
+			var invitation = document.getElementById("invitation");
+			var date = document.getElementById("date");
+			var time = document.getElementById("time");
+			var place = document.getElementById("place");
+
+			var recipent1 = document.getElementById("recipent1");
+			var invitation1 = document.getElementById("invitation1");
+			var date1 = document.getElementById("date1");
+			var time1 = document.getElementById("time1");
+			var place1 = document.getElementById("place1");
+
+			recipent1.innerHTML = localStorage.getItem("recipent");
+			invitation1.innerHTML = localStorage.getItem("invitation");
+			date1.innerHTML = localStorage.getItem("date");
+			time1.innerHTML = localStorage.getItem("time");
+			place1.innerHTML = localStorage.getItem("place");
+		}
+
+			function save(){
+
+			var recipent = document.getElementById("recipent");
+			var invitation = document.getElementById("invitation");
+			var date = document.getElementById("date");
+			var time = document.getElementById("time");
+			var place = document.getElementById("place");
+
+			var recipent1 = document.getElementById("recipent1");
+			var invitation1 = document.getElementById("invitation1");
+			var date1 = document.getElementById("date1");
+			var time1 = document.getElementById("time1");
+			var place1 = document.getElementById("place1");
+
+			recipent1.innerHTML = localStorage.getItem("recipent");
+			invitation1.innerHTML = localStorage.getItem("invitation");
+			date1.innerHTML = localStorage.getItem("date");
+			time1.innerHTML = localStorage.getItem("time");
+			place1.innerHTML = localStorage.getItem("place");
+		}
+
+
+		function myButton() {
+  		location.reload();
+  	}
+
+  	function goBack() {
+			window.history.back();
+		}
+	</script>
+
+	<script type="text/javascript">
+		function changeColor(color)
+		{
+    	document.getElementById('drop-zone').style.backgroundColor = color
+    }
+    </script>
+
+    <script type="text/javascript">
+    	let dragged; 
+      	function onDragOver(event) {
+      	// Prevent default to allow drop
+      	event.preventDefault();
+      }
+
+      function onDragLeave(event) {
+      	event.target.style.background = '';
+      }
+
+      function onDragEnter(event) {
+      	const target = event.target;
+      	if (target && dragged) {
+      		event.preventDefault();
+      		event.dataTransfer.dropEffect = 'move'
+      		target.style.background = '#1f904e';
+      	}
+      }
+
+      function onDrop(event) {
+      	const target = event.target;
+      	if (target && dragged) {
+      		target.style.backgroundColor = '';
+      		event.preventDefault();
+      		dragged.parentNode.removeChild(dragged);
+      		dragged.style.opacity = '';
+      		target.appendChild(dragged);
+      	}
+      }
+
+      function onDragStart(event) {
+      	let target = event.target;
+      	if (target && target.nodeName === 'IMG') { 
+      		dragged = target;
+      		event.dataTransfer.setData('text', target.id);
+      		event.dataTransfer.dropEffect = 'move';
+      		event.target.style.opacity = .3;
+      	}
+      }
+
+      function onDragEnd(event) {
+      	if (event.target && event.target.nodeName === 'IMG') {
+      		event.target.style.opacity = ''; 
+      		dragged = null; 
+      	}
+      }
+
+      const frame = document.querySelector('.frame');
+      const dropZone = document.querySelector('.drop-zone');
+
+      frame.addEventListener('dragstart', onDragStart);
+      frame.addEventListener('dragend', onDragEnd);
+      dropZone.addEventListener('drop', onDrop);
+      dropZone.addEventListener('dragenter', onDragEnter);
+      dropZone.addEventListener('dragleave', onDragLeave);
+      dropZone.addEventListener('dragover', onDragOver);
+  </script>
+
+</head>
+<body id="container">
+	<header>
+		<ul>
+			<li><a href="index.html" class="None"> Home</a></li>
+			<li><a href="About.html"> About</a></li>
+			<li><a href="Contact.html"> Contact</a></li>
+		</ul>
+	</header>
+
+	<aside>
+		<!-- <form method="get" action="" enctype="multipart/form data"> -->
+
+		<tr>
+			<td><button onclick="goBack()" id="goBack">Go Back</button></td>
+		</tr> <br> <br>
+
+		<tr>
+		<td><label for="recipent">Mr/Mrs: </label></td>
+		<td><input type="text" name="recipent" id="recipent"></td>
+		</tr> <br> <br>
+
+		<tr>
+		<td><label for="invitation">You Are Invited To: </label></td>
+		<td><input type="text" name="invitation" id="invitation"></td>
+		</tr> <br> <br>
+
+		<tr>
+		<td><label for="date"> Date: </label></td>
+		<td><input type="date" name="date" id="date" value="yyyy-MM-dd"></td>
+		</tr> <br> <br>
+
+		<tr>
+			<td><label for="time">Time: </label></td>
+		    <td><input type="time" name="time" id="time"></td>
+		</tr> <br> <br>
+
+		<tr>
+		<td><label for="place"> Place: </label></td>
+		<td><input type="text" name="place" id="place"></td>
+		</tr> <br> <br>
+
+		<tr>
+			<td><button onclick="myButton()"> Reset </button></td>
+		</tr>
+
+		<tr>
+			<td><button onclick="add()">Add</button></td>
+		</tr>
+
+		<tr>
+			<td><button onclick="preview()">Preview</button></td>
+
+		</tr> <br><br>
+	<!-- </form> -->
+
+	<select onchange="myFunction(this);" size="1">
+		
+		<option>Arial</option>
+		<option>Arial Black</option>
+		<option>Times New Roman</option>
+		<option>Tahoma</option>
+		<option>Verdana</option>
+		<option>Serif</option>
+		<option>Sans-serif</option>
+		<option>Georgia</option>
+		<option>Palatino Linotype</option>
+		<option>Book Antiqua</option>
+		<option>Helvetica</option>
+		<option>Impact</option>
+		<option>Lucida Sans Unicode</option>
+		<option>Courier New</option>
+		<option>Lucida Console</option>
+	</select>
+
+	</aside>
+
+	<main>
+		<div id="changeColor">
+			<label>Change background color: </label>
+			<input type="Color" name="color" onchange="changeColor(this.value)">
+		</div> <br>
+
+		<div id="cardbox">
+			<section class="drop-zone" id="drop-zone">
+			<div> <br>
+				<div id="recipent1" contenteditable="true"></div>
+				<p> WE CORDIALLY INVITE YOU TO </p>
+				<img src="line1.png" id="line1"><br>
+				<div id="invitation1" contenteditable="true"></div>
+				<img src="line1.png" id="line1"><br>
+				<div id="date1" contenteditable="true"></div>
+				<div id="time1" contenteditable="true"></div>
+				<div id="place1" contenteditable="true"></div>
+			</div>
+		</section>
+		</div><br>
+
+			<div>
+				<tr>
+					<td>
+						<button onclick="submit()"><a href="submit.html"> Submit </a></button>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<button onclick="save()" id="fav">Favorite</button></div>
+					</td>
+				</tr>
+			</div>
+
+		</div>
+	</main>
+</html>

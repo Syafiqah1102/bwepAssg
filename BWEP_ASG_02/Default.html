@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta name="viewport "content="width=device-width, initial-scale=1.0">
+</head>
+
+<style type="text/css">
+
+	body {
+			background: url(.//download.jpg);
+		}
+		#container {
+			display: grid;
+			grid-template-columns: 0px 1fr;
+			grid-template-rows: 15vh 75vh 10vh;
+			grid-template-areas: 
+			"header header"
+			"aside main"
+			"footer footer";
+		}
+		#one {
+			grid-area: header;
+			width: 100%;
+			display: grid;
+			grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+			grid-gap: 20px;
+			position: relative;
+		    
+		}
+
+		ul li {
+
+		float: left;
+		
+		list-style: none;
+
+		}
+
+		
+
+		 ul li a 
+		  {
+		    display: block;
+		    margin: 1px;
+		    padding: 6px 20px;
+		    text-decoration: none;
+		    color: #262626;
+		    border: 1px solid black;
+		  }
+
+		  ul li a.None,
+		   ul li a:hover 
+		  {
+		    background: navy;
+		    color: #fff;
+		    transition: 0.5s;
+		  }
+		main {
+			grid-column: main;
+			width: 100%;
+			display: grid;
+			grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+			grid-gap: 10px;
+			text-align: center;
+
+
+		}
+	.popupBackground 
+	{
+		display: none; 
+		position: fixed; 
+		z-index: 1; 
+		padding-top: 100px;
+		left: 0;
+		top: 0;
+		width: 100%; 
+		height: 100%;
+		overflow: auto;
+		background-color: rgb(0,0,0);
+		background-color: rgba(0,0,0,0.4);
+	}
+
+	.popupForm
+	{
+		background-color: #fefefe;
+		margin: auto;
+		padding: 20px;
+		border: 1px solid #888;
+		width: 600px;
+		box-sizing: border-box;
+	}
+
+	.center
+	{
+		margin: auto;
+		background: white;
+	}
+
+  body 
+  {
+    margin: 0;
+    padding: 0;
+    font-family: 'poppins', sans-serif;
+    background-attachment: fixed;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  
+  
+	ul li 
+	{
+		list-style-type: none;
+	}
+
+	img 
+	{
+	  cursor: pointer;
+	  width: 200px;
+	}
+
+	.drop-zone, #drop-zone 
+	{
+	  width: 180px;
+	  height: 300px;
+	  overflow: hidden;
+	  background: #fff;
+	  border: 2px solid Black;
+	  color: white;
+	  padding: 20px;
+	  float: left;
+	  margin-top: 80px;
+	}
+	
+	.line1 
+	{
+	  width: 300px;
+	  height: 300px;
+	}
+
+	@media screen and (max-width: 768px) 
+	{
+	  .drop-zone,.container
+	  {
+		width: 100%;
+	  }
+	}
+
+	.container 
+	{
+		margin: auto;
+		width: 1200px;
+		height: auto;
+		display:table;
+		background-color: white;
+		padding: 20px;
+	}
+
+	#wordDiv
+	{
+		width: 100%;
+		height: 350px;
+		overflow: hidden;
+		background: #fff;
+		border: 2px solid Black;
+		color: white;
+		padding: 20px;
+		float: left;
+		margin-top: 30px;	
+		box-sizing: border-box;
+	}
+
+	#formDiv 
+	{
+		float: left;
+		width: 50%;
+		height: 400px;
+		margin-left: 30px;
+		padding: 10px;
+		border: 2px solid Black;
+		background-color: #fff;
+		box-sizing: border-box;
+	}
+	
+	.leftDiv 
+	{
+		float: left;
+		width: 230px;
+		margin-left: 0px;
+		box-sizing: border-box;
+		<!--
+		border: 2px solid Black;
+		-->
+		background-color: red;
+	}		
+	
+	#rightDiv 
+	{
+		float: left;
+		width: 22%;
+		height: 460px;
+		margin-left: 30px;
+		<!--
+		border: 2px solid Black;
+		-->
+		background-color: red;
+	}	
+	
+	#frameDiv 
+	{
+		box-sizing: border-box;
+		padding: 10px;	
+		float: left;
+		width: 100%;
+		height: 50%;
+		border: 2px solid Black;
+		background-color: #fff;
+	}	
+	
+	.frameDivContent
+	{
+		border: 1px solid Black;
+		float: left;
+		width: 30%;
+		margin-left: 30px;
+		margin-top: 10px;
+		height: 50px;
+	}
+	
+	#fontDiv 
+	{
+		margin-top: 40px;
+		box-sizing: border-box;
+		padding: 10px;	
+		float: left;
+		width: 100%;
+		height: 40%;
+		border: 2px solid Black;
+		background-color: #fff;
+	}		
+
+	#text {
+		box-sizing: border-box;
+		padding: 10px;	
+		width: 100%;
+		height: 40%;
+		border: 2px solid Black;
+		background-color: #fff;
+	}
+
+	.close-btn {
+		position: absolute;
+		right: 20px;
+		top: 20px;
+		width: 30px;
+		height: 30px;
+		background: #222;
+		color: #fff;
+		font-size: 25px;
+		font-weight: 600;
+		line-height: 30px;
+		text-align: center;
+		border-radius: 50%;
+	}
+	
+</style>
+
+<body>
+
+	<header>
+	  
+	  <div class="Menu"></div>
+	  <header id="one">
+		<ul>
+		  <li><a href="index.html" class="None"> Home</a></li>
+		  <li><a href="About.html"> About</a></li>
+		  <li><a href="Contact.html"> Contact</a></li>
+		</ul>
+	  </header>
+	  <div class="clear"></div>
+	</header>
+
+
+  <script type="text/javascript">
+  
+    function changeColor(color){
+    document.getElementById('formDiv').style.backgroundColor = color
+  }
+    </script>
+    <div style="text-align: center;">
+  <label>Select your Own backgroung Color</label>
+  <input type="Color" name="color" onchange="changeColor(this.value)">
+    </div>
+
+    <div>
+			<button onclick="goBack()" id="goBack">Back</button>
+    </div>
+
+	<div id="popupBackground" class="popupBackground">
+		<div class="popupForm" id="popupForm">
+			<p id="popupNamePlaceholder" style="text-align: center;"> Name </p>
+			<p id="popupGreetPlaceholder" style="text-align: center;"> Hello, </p>
+			<p id="popupDatePlaceholder" style="text-align: center;"> 2021-04-16</p>
+			<p id="popupTimePlaceholder" style="text-align: center;"> 11:39 </p>  
+			<p id="popupVenuePlaceholder" style="text-align: center;"> ICC</p>
+			<p id="popupClosePlaceholder"style="text-align: center;"> Bye </p> 
+			</br>
+			<div style="margin: auto; width: 100px;">
+				<button style="width: 100%; "onclick=location.href='submit.html'> Submit </button> 
+				<button style="width: 100%;" onclick="save()"> Favourite</button>
+				<div id="popup-1"><button style="margin-left:60px;" class="close-btn" onclick="closePopup()"> &times;</button> </div>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+
+		<div class="leftDiv">
+			<div id="text" ondrop="drop(event)" ondragover="allowDrop(event)">
+				<label style="color: red"> <center><b><u> Drag the text </u> </b> </center> </label>
+						 <p draggable="true" ondragstart="drag(event)" id="Wedding"> Wedding </p>
+						 <p draggable="true" ondragstart="drag(event)" id="Birthday">Birthday </p> 
+						 <p draggable="true" ondragstart="drag(event)" id="Politeknik"> Politeknik </p>
+						 <p draggable="true" ondragstart="drag(event)" id="Beach">Beach</p>
+						 <p draggable="true" ondragstart="drag(event)" id="Graduate">Graduate</p>
+						 <p draggable="true" ondragstart="drag(event)" id="Best Student">Best Student</p>
+			</div>
+			<div id="wordDiv">
+				<br><input type="text" id="name" placeholder="Enter name"><br>
+				<br><input type="text" id="greet" placeholder="Enter invitation"><br>
+				<br><input type="date" id="date"><br>
+				<br><input type="time" id="time"><br>
+				<br><input type="text" id="venue" placeholder="Enter the venue"><br>
+				<br><input type="text" id="close" placeholder="Enter occasion"><br>
+				<br><button style="margin-left:70px;" onclick="addText()"> Add </button>  
+				<br><button style="margin-left:60px;" onclick="myButton()"> Reset </button> 
+			</div>			
+		</div>
+
+		<div id="formDiv" ondrop="drop(event)" ondragover="allowDrop(event)">
+			<p id="namePlaceholder" style="text-align: center;">  </p>
+			<p id="greetPlaceholder" style="text-align: center;"> </p>
+			<p id="datePlaceholder" style="text-align: center;"> </p>
+			<p id="timePlaceholder"style="text-align: center;">  </p>  
+			<p id="venuePlaceholder"style="text-align: center;"> </p>
+			<p id="closePlaceholder"style="text-align: center;">  </p> 
+			</br>
+			<button style="margin-left:140px; width: 80px;" onclick=location.href='submit.html'> Submit </button>  			
+			<button style="margin-left:140px; width: 80px;" onclick="preview()"> Preview </button>  
+
+
+		</div>
+
+
+		<div id="rightDiv">
+			<div id="frameDiv">
+			
+				<div style="text-align: center; width: 100%;">
+					<p style="color: red"><u><b> Drag the Frames </b></u></p>
+				</div>
+			
+				<div class="frameDivContent">
+					<img src="./img2.png" draggable="true" ondragstart="drag(event)" id="drag1" style="width: 100%; height: 100%;">
+				</div>
+				
+				<div class="frameDivContent">
+					<img src="./img3.png" draggable="true" ondragstart="drag(event)" id="drag2" style="width: 100%; height: 100%;">
+				</div>
+				
+				<div class="frameDivContent">
+					<img src="./img4.png" draggable="true" ondragstart="drag(event)" id="drag3" style="width: 100%; height: 100%;">
+				</div>
+				
+				<div class="frameDivContent">
+					<img src="./img5.png" draggable="true" ondragstart="drag(event)" id="drag4" style="width: 100%; height: 100%;">
+				</div>
+			</div>
+			<div id="fontDiv">
+				<div style="text-align: center; width: 100%;">
+					<p style="color:red"><u><b> Fonts </b></u></p>
+				</div>
+				<label>Text Size: </label>
+				<select name="fontSize" id="fontSize">
+					<option value="12px">12</option>
+					<option value="14px">14</option>
+					<option value="16px">16</option>
+					<option value="18px">18</option>
+					<option value="20px">20</option>
+					<option value="22px">22</option>
+					<option value="24px">24</option>
+					<option value="26px">26</option>
+				</select>		
+
+				</br></br>
+				
+				<label>Font Style: </label>
+				<select name="fontStyle" id="fontStyle">
+					<option value="Arial">Arial</option>
+					<option value="Calibri">Calibri</option>
+					<option value="Roboto">Roboto</option>
+					<option value="Roboto">Comic Sans Serif</option>
+					<option>Georgia</option>
+					<option>Palatino Linotype</option>
+					<option>Book Antiqua</option>
+					<option>Helvetica</option>
+					<option>Impact</option>
+					<option>Lucida Sans Unicode</option>
+					<option>Courier New</option>
+					<option>Lucida Console</option>
+				</select>	
+				
+				<br><br><button style="margin-left:60px; width: 80px;" onclick="changeFontStyle()"> Set </button>  
+			</div>			
+		</div>
+	</div>
+
+	<style type="text/css">
+	
+		@media (max-width: 1200px)
+		{
+			.container 
+			{
+				width: 100%;
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			
+			#wordDiv
+			{
+				width: 100%;
+				float: left;
+				margin: 0 0 0 0;
+				box-sizing: border-box;
+			}
+
+			#formDiv 
+			{
+				box-sizing: border-box;
+				width: 100%;
+				float: left;
+				margin: 0 0 0 0;
+			}
+			
+			#rightDiv 
+			{
+				width: 100%;
+				float: left;
+				margin: 0 0 0 0;
+			}	
+			
+			#fontDiv 
+			{
+				margin-top: 40px;
+				box-sizing: border-box;
+				padding: 10px;	
+				float: left;
+				width: 100%;
+				height: 40%;
+				margin: 0 0 0 0;
+				border: 2px solid Black;
+				background-color: #fff;
+			}				
+		}
+
+	</style>
+
+  <script type="text/javascript">
+
+  	function myButton() {
+  		location.reload();
+  	}
+
+    function allowDrop(ev) {
+      ev.preventDefault();
+    }
+
+    function drag(ev) {
+      ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+	function drop(ev) 
+	{
+		ev.preventDefault();
+		var data = ev.dataTransfer.getData("text");
+		
+		var formDiv = document.getElementById("formDiv");
+		
+		console.log(data);
+		
+		switch(data) 
+		{
+			case "drag1":
+				formDiv.style.border = '1em solid black';
+				formDiv.style.borderImage = "url(./img2.png) 30 30 round";
+				
+			break;
+			case "drag2":
+				formDiv.style.border = '1em solid black';
+				formDiv.style.borderImage = "url(./img3.png) 30 30 round";
+			break;
+			case "drag3":
+				formDiv.style.border = '1em solid black';
+				formDiv.style.borderImage = "url(./img4.png) 30 30 round";			
+			break;
+			case "drag4":
+				formDiv.style.border = '1em solid black';
+				formDiv.style.borderImage = "url(./img5.png) 30 30 round";		
+			default:
+				
+		}
+
+	}
+
+    function addText(){
+		var name = document.getElementById("name");
+		var greet = document.getElementById("greet");
+		var date = document.getElementById("date");
+		var time = document.getElementById("time");
+		var venue = document.getElementById("venue");
+		var close = document.getElementById("close");
+	
+		document.getElementById("namePlaceholder").innerHTML = name.value;
+		document.getElementById("greetPlaceholder").innerHTML = greet.value;
+		document.getElementById("datePlaceholder").innerHTML = date.value;
+		document.getElementById("timePlaceholder").innerHTML = time.value;
+		document.getElementById("venuePlaceholder").innerHTML = venue.value;
+		document.getElementById("closePlaceholder").innerHTML = close.value;
+		
+		document.getElementById("popupNamePlaceholder").innerHTML = name.value;
+		document.getElementById("popupGreetPlaceholder").innerHTML = greet.value;
+		document.getElementById("popupDatePlaceholder").innerHTML = date.value;
+		document.getElementById("popupTimePlaceholder").innerHTML = time.value;
+		document.getElementById("popupVenuePlaceholder").innerHTML = venue.value;
+		document.getElementById("popupClosePlaceholder").innerHTML = close.value;
+
+		localStorage.setItem("name", name.value); 
+		localStorage.setItem("greet", greet.value); 
+		localStorage.setItem("date", date.value); 
+		localStorage.setItem("time", time.value); 
+		localStorage.setItem("venue", venue.value);
+		localStorage.setItem("close", close.value);
+    }
+	
+	function changeFontStyle()
+	{
+		var fontSelectedValue = document.getElementById("fontStyle");
+		var fontSizeSelectedValue = document.getElementById("fontSize");
+	
+		document.getElementById("namePlaceholder").style.fontFamily = fontSelectedValue.options[fontSelectedValue.selectedIndex].value;
+		document.getElementById("greetPlaceholder").style.fontFamily = fontSelectedValue.options[fontSelectedValue.selectedIndex].value;
+		document.getElementById("datePlaceholder").style.fontFamily = fontSelectedValue.options[fontSelectedValue.selectedIndex].value;
+		document.getElementById("timePlaceholder").style.fontFamily = fontSelectedValue.options[fontSelectedValue.selectedIndex].value;
+		document.getElementById("venuePlaceholder").style.fontFamily = fontSelectedValue.options[fontSelectedValue.selectedIndex].value;
+		document.getElementById("closePlaceholder").style.fontFamily = fontSelectedValue.options[fontSelectedValue.selectedIndex].value;
+		
+		document.getElementById("namePlaceholder").style.fontSize = fontSizeSelectedValue.options[fontSizeSelectedValue.selectedIndex].value;
+		document.getElementById("greetPlaceholder").style.fontSize = fontSizeSelectedValue.options[fontSizeSelectedValue.selectedIndex].value;
+		document.getElementById("datePlaceholder").style.fontSize = fontSizeSelectedValue.options[fontSizeSelectedValue.selectedIndex].value;
+		document.getElementById("timePlaceholder").style.fontSize = fontSizeSelectedValue.options[fontSizeSelectedValue.selectedIndex].value;
+		document.getElementById("venuePlaceholder").style.fontSize = fontSizeSelectedValue.options[fontSizeSelectedValue.selectedIndex].value;
+		document.getElementById("closePlaceholder").style.fontSize = fontSizeSelectedValue.options[fontSizeSelectedValue.selectedIndex].value;
+	}
+
+	function save()
+	{
+
+		var name = document.getElementById("name");
+		var greet = document.getElementById("greet");
+		var date = document.getElementById("date");
+		var time = document.getElementById("time");
+		var venue = document.getElementById("venue");
+		var close = document.getElementById("close");
+	
+		document.getElementById("namePlaceholder").innerHTML = name.value;
+		document.getElementById("greetPlaceholder").innerHTML = greet.value;
+		document.getElementById("datePlaceholder").innerHTML = date.value;
+		document.getElementById("timePlaceholder").innerHTML = time.value;
+		document.getElementById("venuePlaceholder").innerHTML = venue.value;
+		document.getElementById("closePlaceholder").innerHTML = close.value;
+
+		localStorage.setItem("name", name.value); 
+		localStorage.setItem("greet", greet.value); 
+		localStorage.setItem("date", date.value); 
+		localStorage.setItem("time", time.value); 
+		localStorage.setItem("venue", venue.value);
+		localStorage.setItem("close", close.value);
+	
+	}
+
+	function preview()
+	{
+		var formDiv = document.getElementById("formDiv");
+		var popupForm = document.getElementById("popupForm");
+	
+		popupBackground.style.display = "block";
+		
+		addText();
+		changeFontStyle();
+
+		document.getElementById("popupForm").style.backgroundColor = document.getElementById('formDiv').style.backgroundColor;
+		
+		document.getElementById("popupForm").style.border = document.getElementById("formDiv").style.border;
+		document.getElementById("popupForm").style.borderImage = document.getElementById("formDiv").style.borderImage;
+		document.getElementById("popupForm").style.borderWidth = document.getElementById("formDiv").style.borderWidth;
+
+
+		document.getElementById("namePlaceholder").innerHTML = name.value;
+		document.getElementById("greetPlaceholder").innerHTML = greet.value;
+		document.getElementById("datePlaceholder").innerHTML = date.value;
+		document.getElementById("timePlaceholder").innerHTML = time.value;
+		document.getElementById("venuePlaceholder").innerHTML = venue.value;
+		document.getElementById("closePlaceholder").innerHTML = close.value;
+	
+
+
+		localStorage.setItem("name", name.value); 
+		localStorage.setItem("greet", greet.value); 
+		localStorage.setItem("date", date.value); 
+		localStorage.setItem("time", time.value); 
+		localStorage.setItem("venue", venue.value);
+		localStorage.setItem("close", close.value);
+	
+	
+	}
+
+	function goBack() {
+ 		window.history.back();
+ 	}
+
+	function closePopup()
+	{
+		document.getElementById("popupBackground").style.display = "none";
+	}
+
+	</script>
+
+</body>
+</html>
